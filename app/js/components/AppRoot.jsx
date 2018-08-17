@@ -4,15 +4,15 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import AddTodo from './AddTodo.jsx';
 import TodoList from './TodoList.jsx';
-import Footer from './Footer.jsx';
+import Estatus from './Estatus.jsx';
 import { store, persistor } from '../store';
 
 
 const TodoApp = () => (
   <div>
     <AddTodo />
+    <Estatus />
     <TodoList />
-    <Footer />
   </div>
 );
 

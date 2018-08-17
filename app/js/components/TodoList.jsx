@@ -9,22 +9,24 @@ const Todo = ({
   text,
   date
 }) => (
-    <li
-      onClick={onClick}
-      style={{
-        textDecoration:
+    <li>
+      <div
+        onClick={onClick}
+        style={{
+          textDecoration:
+            completed ?
+              'line-through' :
+              'none'
+        }}
+        className={
           completed ?
-            'line-through' :
-            'none'
-      }}
-      className={
-        completed ?
-          'completed' :
-          ''
-      }
-    >
-      {text} - {date}
-      {<CopyButton></CopyButton>}
+            'completed' :
+            ''
+        }
+      >
+        {text} - {date}
+      </div>
+      <p>{<CopyButton></CopyButton>}</p>
     </li>
   );
 
@@ -46,7 +48,10 @@ const TodoList = ({
 const CopyButton = ({
 
 }) => (
-    <button>Copiar linea</button>
+    <button onClick={e => {
+      e.preventDefault();
+
+    }}>Copiar linea</button>
   );
 
 const getVisibleTodos = (
