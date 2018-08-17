@@ -7,18 +7,18 @@ const Link = ({
   active,
   children,
   onClick
-  }) => {
+}) => {
   if (active) {
     return <span>{children}</span>;
   }
 
   return (
     <a href='#'
-       onClick={e => {
-         e.preventDefault();
-         onClick();
-       }}
-      >
+      onClick={e => {
+        e.preventDefault();
+        onClick();
+      }}
+    >
       {children}
     </a>
   );
@@ -29,9 +29,7 @@ const mapStateProps = (
   ownProps
 ) => {
   return {
-    active:
-      ownProps.filter ===
-      state.visibilityFilter
+    active: ownProps.filter === state.visibilityFilter
   };
 };
 const mapDispatchProps = (
@@ -53,19 +51,27 @@ const FilterLink = connect(
 )(Link);
 
 export default () => (
-  <p>
-    Show:
-    {' '}
-    <FilterLink filter='SHOW_ALL'>
-      All
-    </FilterLink>
-    {', '}
-    <FilterLink filter='SHOW_ACTIVE'>
-      Active
-    </FilterLink>
-    {', '}
-    <FilterLink filter='SHOW_COMPLETED'>
-      Completed
-    </FilterLink>
-  </p>
+  <div>
+    <p>
+      Show:
+      {' '}
+      <FilterLink filter='SHOW_ALL'>
+        All
+      </FilterLink>
+      {', '}
+      <FilterLink filter='SHOW_ACTIVE'>
+        Active
+      </FilterLink>
+      {', '}
+      <FilterLink filter='SHOW_COMPLETED'>
+        Completed
+      </FilterLink>
+    </p>
+    <p>
+      <button onClick={() => {
+        localStorage.clear();
+        location.reload();
+      }}>Eliminar lista</button>
+    </p>
+  </div>
 );

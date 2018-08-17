@@ -1,10 +1,11 @@
 let nextTodoId = 0;
 
-export const addTodo = (text) => {
+export const addTodo = (text, date) => {
   return {
     type: 'ADD_TODO',
     id: nextTodoId++,
-    text
+    text: text,
+    date: date
   };
 };
 
@@ -19,5 +20,12 @@ export const setVisibilityFilter = (filter) => {
   return {
     type: 'SET_VISIBILITY_FILTER',
     filter
+  };
+};
+
+export const copyTodo = (id) => {
+  return {
+    type: 'COPY_TODO',
+    id
   };
 };

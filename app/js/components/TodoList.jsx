@@ -6,40 +6,48 @@ import { toggleTodo } from '../actions';
 const Todo = ({
   onClick,
   completed,
-  text
-  }) => (
-  <li
-    onClick={onClick}
-    style={{
-      textDecoration:
-        completed ?
-          'line-through' :
-          'none'
-    }}
-    className={
+  text,
+  date
+}) => (
+    <li
+      onClick={onClick}
+      style={{
+        textDecoration:
+          completed ?
+            'line-through' :
+            'none'
+      }}
+      className={
         completed ?
           'completed' :
           ''
-    }
+      }
     >
-    {text}
-  </li>
-);
+      {text} - {date}
+      {<CopyButton></CopyButton>}
+    </li>
+  );
 
 const TodoList = ({
   todos,
   onTodoClick
-  }) => (
-  <ul>
-    {todos.map(todo =>
+}) => (
+    <ul>
+      {todos.map(todo =>
         <Todo
           key={todo.id}
           {...todo}
           onClick={() => onTodoClick(todo.id)}
-          />
-    )}
-  </ul>
-);
+        />
+      )}
+    </ul>
+  );
+
+const CopyButton = ({
+
+}) => (
+    <button>Copiar linea</button>
+  );
 
 const getVisibleTodos = (
   todos,
@@ -50,11 +58,11 @@ const getVisibleTodos = (
       return todos;
     case 'SHOW_COMPLETED':
       return todos.filter(
-          t => t.completed
+        t => t.completed
       );
     case 'SHOW_ACTIVE':
       return todos.filter(
-          t => !t.completed
+        t => !t.completed
       );
   }
 }

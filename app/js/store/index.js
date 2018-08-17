@@ -1,4 +1,6 @@
 import { createStore, combineReducers } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -6,6 +8,7 @@ const todo = (state, action) => {
       return {
         id: action.id,
         text: action.text,
+        date: action.date,
         completed: false
       };
     case 'TOGGLE_TODO':
@@ -55,4 +58,16 @@ const todoApp = combineReducers({
   visibilityFilter
 });
 
-export default createStore(todoApp)
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, todoApp)
+
+let store = createStore(persistedReducer)
+let persistor = persistStore(store)
+
+export {
+  store, persistor
+}
